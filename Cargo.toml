@@ -2,7 +2,14 @@
 name = "postcat"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
 description = "A modern, keyboard-first API client in your terminal"
+license = "MIT"
+repository = "https://github.com/egoist/postcat"
+homepage = "https://github.com/egoist/postcat"
+readme = "README.md"
+keywords = ["tui", "http", "api", "client", "postman"]
+categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]
 anyhow = "1"
