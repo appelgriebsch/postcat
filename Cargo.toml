@@ -1,0 +1,26 @@
+[package]
+name = "postcat"
+version = "0.1.0"
+edition = "2024"
+description = "A modern, keyboard-first API client in your terminal"
+
+[dependencies]
+anyhow = "1"
+base64 = "0.22"
+crossterm = "0.28"
+dirs = "6"
+ratatui = "0.29"
+reqwest = { version = "0.12", default-features = false, features = [
+    "rustls-tls",
+    "gzip",
+    "brotli",
+    "deflate",
+] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+tokio = { version = "1", features = ["rt-multi-thread", "time"] }
+tui-textarea = "0.7"
+
+[profile.release]
+lto = "thin"
+strip = true
