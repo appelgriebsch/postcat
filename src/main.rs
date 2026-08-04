@@ -10,6 +10,14 @@ use crossterm::event::{
 use crossterm::execute;
 
 fn main() -> Result<()> {
+    if std::env::args()
+        .nth(1)
+        .is_some_and(|arg| arg == "-v" || arg == "--version")
+    {
+        println!("postcat {}", env!("CARGO_PKG_VERSION"));
+        return Ok(());
+    }
+
     let rt = tokio::runtime::Builder::new_multi_thread()
         .enable_all()
         .worker_threads(2)
