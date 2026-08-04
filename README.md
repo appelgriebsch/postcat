@@ -19,6 +19,20 @@ A modern, keyboard-first Postman alternative that lives in your terminal. Built 
 
 ## Installation
 
+### Install script (macOS & Linux)
+
+Downloads the latest prebuilt binary and installs it to `~/.local/bin` (falling back to `/usr/local/bin`):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/egoist/postcat/main/install.sh | bash
+```
+
+Install a specific version with `POSTCAT_VERSION`, or change the install location with `POSTCAT_INSTALL_DIR`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/egoist/postcat/main/install.sh | POSTCAT_VERSION=0.3.0 bash
+```
+
 ### Homebrew (macOS)
 
 Install the prebuilt binary with Homebrew:
