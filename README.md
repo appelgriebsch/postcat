@@ -19,6 +19,14 @@ A modern, keyboard-first Postman alternative that lives in your terminal. Built 
 
 ## Installation
 
+### Homebrew (macOS)
+
+Install the prebuilt binary with Homebrew:
+
+```bash
+brew install --cask egoist/tap/postcat
+```
+
 ### From crates.io
 
 Install the latest release with Cargo:
