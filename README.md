@@ -31,7 +31,39 @@ A modern, keyboard-first Postman alternative that lives in your terminal. Built 
 - **Mouse where it helps** — click panes, tabs, and rows; click into the url or the body to edit right where you clicked; click the method chip for a dropdown picker; scroll the response; the pointer is a normal arrow everywhere and becomes a text I-beam only over the field you're actively editing (terminals with OSC 22)
 - **Workspace persistence** — draft, saved requests, history, and env vars survive restarts (`~/Library/Application Support/postcat` or `~/.config/postcat`)
 
+## Installation
+
+### From crates.io
+
+Install the latest release with Cargo:
+
+```bash
+cargo install postcat
+```
+
+This requires Rust 1.85 or newer. To update an existing installation:
+
+```bash
+cargo install postcat --force
+```
+
+### From source
+
+```bash
+git clone https://github.com/egoist/postcat.git
+cd postcat
+cargo install --path . --locked
+```
+
 ## Run
+
+If you installed the binary with Cargo, start postcat with:
+
+```bash
+postcat
+```
+
+When working from a checkout, you can also run it directly:
 
 ```bash
 cargo run --release
