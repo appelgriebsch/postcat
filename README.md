@@ -33,6 +33,21 @@ Install a specific version with `POSTCAT_VERSION`, or change the install locatio
 curl -fsSL https://raw.githubusercontent.com/egoist/postcat/main/install.sh | POSTCAT_VERSION=0.3.0 bash
 ```
 
+### Install script (Windows)
+
+Downloads the latest prebuilt binary and installs it to `%USERPROFILE%\.local\bin`:
+
+```powershell
+irm https://raw.githubusercontent.com/egoist/postcat/main/install.ps1 | iex
+```
+
+Install a specific version with `POSTCAT_VERSION`, or change the install location with `POSTCAT_INSTALL_DIR`:
+
+```powershell
+$env:POSTCAT_VERSION = "0.3.0"
+irm https://raw.githubusercontent.com/egoist/postcat/main/install.ps1 | iex
+```
+
 ### Homebrew (macOS)
 
 Install the prebuilt binary with Homebrew:

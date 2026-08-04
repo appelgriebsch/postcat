@@ -48,7 +48,7 @@ detect_target() {
       esac
       ;;
     MINGW*|MSYS*|CYGWIN*)
-      error "please use the Windows binary from https://github.com/${REPO}/releases instead of this script"
+      error "please use install.ps1 instead: irm https://raw.githubusercontent.com/${REPO}/main/install.ps1 | iex"
       ;;
     *)
       error "unsupported OS: $os"
