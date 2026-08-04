@@ -24,6 +24,12 @@ jobs:
             runner: macos-14
           - target: x86_64-apple-darwin
             runner: macos-13
+          - target: x86_64-unknown-linux-gnu
+            runner: ubuntu-latest
+          - target: aarch64-unknown-linux-gnu
+            runner: ubuntu-latest
+          - target: x86_64-pc-windows-msvc
+            runner: windows-latest
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
@@ -32,13 +38,23 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
+      - name: Install cross-compiler
+        if: matrix.target == 'aarch64-unknown-linux-gnu'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu
+          echo "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc" >> "$GITHUB_ENV"
+          echo "CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc" >> "$GITHUB_ENV"
+
       - name: Test
+        if: matrix.target != 'aarch64-unknown-linux-gnu'
         run: cargo test --locked
 
       - name: Build binary
         run: cargo build --release --locked --target ${{ matrix.target }}
 
-      - name: Package binary
+      - name: Package binary (Unix)
+        if: "!contains(matrix.target, 'windows')"
         env:
           TARGET: ${{ matrix.target }}
           VERSION: ${{ github.ref_name }}
@@ -48,10 +64,24 @@ jobs:
           cp "target/$TARGET/release/postcat" package/postcat
           tar -C package -czf "postcat-${version}-${TARGET}.tar.gz" postcat
 
+      - name: Package binary (Windows)
+        if: contains(matrix.target, 'windows')
+        shell: bash
+        env:
+          TARGET: ${{ matrix.target }}
+          VERSION: ${{ github.ref_name }}
+        run: |
+          version=${VERSION#v}
+          mkdir package
+          cp "target/$TARGET/release/postcat.exe" package/postcat.exe
+          cd package && 7z a "../postcat-${version}-${TARGET}.zip" postcat.exe
+
       - uses: actions/upload-artifact@v4
         with:
           name: postcat-${{ matrix.target }}
-          path: postcat-*.tar.gz
+          path: |
+            postcat-*.tar.gz
+            postcat-*.zip
 
   publish:
     name: Publish release
@@ -99,7 +129,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          files: release-assets/*.tar.gz
+          files: |
+            release-assets/*.tar.gz
+            release-assets/*.zip
 
       - name: Update Homebrew tap
         if: startsWith(github.ref, 'refs/tags/')
