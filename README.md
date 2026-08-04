@@ -2,22 +2,8 @@
 
 A modern, keyboard-first Postman alternative that lives in your terminal. Built with [ratatui](https://ratatui.rs).
 
-```
-╭ Library ──────────╮ ╭────────────────────────────────────────────────╮
-│ Saved 3 │ History │ │ POST   ▾ │ {{base}}/users            ⏎ send    │
-│                   │ ╰────────────────────────────────────────────────╯
-│▌POST create user  │ ╭ Request · create user ─────────────────────────╮
-│ GET  list users   │ │ Query  Headers 2  Body JSON  Auth Bearer       │
-│ GET  health       │ │  1 {                                           │
-│                   │ │  2   "name": "dude"                            │
-│                   │ │  3 }                                           │
-│                   │ ╰────────────────────────────────────────────────╯
-│                   │ ╭ Response ───────────● 201 Created  48 ms  1 KB ╮
-│                   │ │ Body  Headers 12                               │
-│                   │ │ { "id": 42, "name": "dude" }                   │
-╰───────────────────╯ ╰────────────────────────────────────────────────╯
-  NORMAL   ⏎ edit · a add · ␣ toggle · [ ] tab · s send
-```
+<img width="2430" height="1678" alt="CleanShot 2026-08-05 at 03 47 43@2x" src="https://github.com/user-attachments/assets/2fa891d7-2fe6-493c-99bf-ed0ea8de47ee" />
+
 
 ## Features
 
